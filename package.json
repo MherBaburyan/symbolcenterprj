@@ -1,0 +1,8 @@
+{
+  "name": "symbolcenterexp",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@netlify/blobs": "^8.2.0"
+  }
+}
