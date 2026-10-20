@@ -12,8 +12,13 @@ export default async (req) => {
   const slots = getStore({ name: "slots", consistency: "strong" });
   const { blobs } = await slots.list();
   for (let n = blobs.length + 1; n <= MAX_PARTICIPANTS; n++) {
-    const r = await slots.setJSON(pad(n), { time: new Date().toISOString() }, { onlyIfNew: true });
-    if (r.modified) return json({ n });
+    const token = crypto.randomUUID();
+    const r = await slots.set(pad(n), JSON.stringify({ time: new Date().toISOString(), token }), { onlyIfNew: true });
+    if (r && r.modified === true) return json({ n });
+    if (r && r.modified === false) continue; // slot already taken
+    // no result returned by this library version: read back and check the slot is ours
+    const cur = await slots.get(pad(n), { type: "json" });
+    if (cur && cur.token === token) return json({ n });
   }
   return json({ full: true }, 403);
 };
