@@ -1,6 +1,6 @@
 import { getStore } from "@netlify/blobs";
 
-const COLS = ["participant","trial","shape","screen_w","screen_h","dpr","box_left","box_top","bbox_cx","bbox_cy","centroid_x","centroid_y","click_x","click_y","click_screen_x","click_screen_y","center_screen_x","center_screen_y","dx_centroid","dy_centroid","dx_bbox","dy_bbox","rt_ms","server_time"];
+const COLS = ["participant","pnum","order","part","segment","trial","shape","img_px","screen_w","screen_h","dpr","box_left","box_top","bbox_cx","bbox_cy","centroid_x","centroid_y","click_x","click_y","click_screen_x","click_screen_y","center_screen_x","center_screen_y","dx_centroid","dy_centroid","dx_bbox","dy_bbox","rt_ms","server_time"];
 const esc = v => {
   if (v === null || v === undefined) return "";
   const s = String(v);
